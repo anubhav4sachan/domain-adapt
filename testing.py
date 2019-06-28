@@ -18,6 +18,7 @@ model = torch.load('./mod.pth')
 model = model.eval()
 
 Transform = torchvision.transforms.Compose([
+        torchvision.transforms.Grayscale(),
         torchvision.transforms.ToTensor(),
         ])
 
@@ -32,6 +33,7 @@ def createParts(img):
         for j in range (0, 241, 80):
             img_parts.append(img[i:i+80, j:j+80])
     return img_parts
+
 def assemble(img_parts):
     img_cat = []        
     for i in range(0, 10, 4):
@@ -45,12 +47,15 @@ def assemble(img_parts):
     return r
             
 for data in loader:
-#    img_parts  = createParts(data[0].data.numpy())
+#    img_parts  = createParts(data[0].data.numpy().squeeze())
+#    img_p = np.asarray(img_parts)
+#    img_p = img_p[:, np.newaxis, :, :]
+#    out = model(torch.from_numpy(img_p).cuda())[0]
 #    out = []
 #    for inp in img_parts:
-#        out.append(model(torch.from_numpy(inp)))
+#    out = (model(torch.from_numpy(img_parts[0]).cuda())[0])
     img = data[0].cuda()
     out = model(img)
-    
+#    
 f = out[0].cpu().data.numpy().squeeze()
 #cv2.imwrite('11.jpg', out.cpu().data.numpy().squeeze())

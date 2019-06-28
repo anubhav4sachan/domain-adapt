@@ -10,6 +10,6 @@ source_train = get_source()
 source_val = get_source(train = False)
 
 target_train = get_target()
-target_val = get_target(train= False)
+#target_val = get_target(train= False)
 
 train(source_train, target_train)

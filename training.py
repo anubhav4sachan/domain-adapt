@@ -13,7 +13,9 @@ def train(dataloader_source, dataloader_target):
     criteria1 = torch.nn.CrossEntropyLoss()
     criteria2 = torch.nn.MSELoss()
     
-    for epoch in range (30):
+    num_ep = 1
+    
+    for epoch in range (num_ep):
         model.train()
         running_loss = 0
         
@@ -59,11 +61,11 @@ def train(dataloader_source, dataloader_target):
             
             running_loss += loss.item()
             
-            if i%200 == 0:
+            if i%50 == 0:
                 print(epoch, i, loss.item())
                 
             i += 1
                 
-    torch.save(model, 'mod.pth')
+    torch.save(model, 'model-'+str(num_ep)+'.pth')
 
     return model

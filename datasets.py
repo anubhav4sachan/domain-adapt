@@ -124,7 +124,7 @@ def get_source(train=True):
 def get_target(train=True):
     if train == True:
         fil = []
-        for files in os.walk('./data/target/train-aug'):
+        for files in os.walk('./data/target_images/train-aug'):
             fil.append(files[2])
                 
         file = []
@@ -166,17 +166,17 @@ def get_target(train=True):
                 transforms.ToTensor()
                 ])       
                     
-        dataset = imgdata('./data/target/train-aug',
+        dataset = imgdata('./data/target_images/train-aug',
                               img_name=names, istrain=True, transform=data_transform,
                               labels=lbl)
                
-        dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
+        dataloader = DataLoader(dataset, batch_size=8, shuffle=True)
     
         return dataloader
     
     elif train == False:
         fil = []
-        for files in os.walk('./data/target/test-aug'):
+        for files in os.walk('./data/target_images/test-aug'):
             fil.append(files[2])
                 
         file = []
@@ -218,7 +218,7 @@ def get_target(train=True):
                 transforms.ToTensor()
                 ])         
                     
-        dataset = imgdata('./data/target/test-aug',
+        dataset = imgdata('./data/target_images/test-aug',
                               img_name=names, istrain=True, transform=data_transform,
                               labels=lbl)
                

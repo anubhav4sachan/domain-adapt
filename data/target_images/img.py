@@ -4,11 +4,11 @@ import numpy as np
 import os
 
 
-for files in os.walk('./tf'):
+for files in os.walk('./Train_500'):
     pass
     
 for name in files[2]:   
-    img = cv2.imread('./tf/'+name)    
+    img = cv2.imread('./Train_500/'+name)    
     img_parts = []
     for i in range (0, 161, 80):
         for j in range (0, 241, 80):
@@ -16,7 +16,7 @@ for name in files[2]:
     f = 0
     for k in img_parts:
         f+=1
-        cv2.imwrite('./tf-aug/' + name.split('.')[0] + '_' +str(f) + '.jpg', k)
+        cv2.imwrite('./train-aug/' + name.split('.')[0] + '_' +str(f) + '.jpg', k)
 
 #img_cat = []        
 #for i in range(0, 10, 4):
