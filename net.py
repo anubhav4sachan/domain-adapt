@@ -38,16 +38,16 @@ class mainNet(nn.Module):
         x = x.expand(x.data.shape[0], 3, 80, 80)
 
         feat_r = self.feature(x)
-#        feat = feat_r.view(-1, 1*80*80)
-#        
-#        p = float(random.randint(1, 500)/10000)
-#        alpha = 2. / (1. + np.exp(-10 * p)) - 1
-#        
-#        rev_feat = ReverseLayerF.apply(feat, alpha)
-#        dom = self.domain(rev_feat)
+        feat = feat_r.view(-1, 1*80*80)
         
-#        return feat_r, dom
-        return feat_r
+        p = float(random.randint(1, 500)/10000)
+        alpha = 2. / (1. + np.exp(-10 * p)) - 1
+        
+        rev_feat = ReverseLayerF.apply(feat, alpha)
+        dom = self.domain(rev_feat)
+        
+        return feat_r, dom
+#        return feat_r
     
 #from torchsummary import summary
 #model = mainNet().to(device)

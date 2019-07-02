@@ -11,10 +11,6 @@ import matplotlib
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-#model = CNNModel()
-#model.load_state_dict(torch.load('./DANN-15.pth'))
-#model.eval()
-
 #model = torch.load('./deep-model-0.pth')
 model = torch.load('./model.pth')
 model = model.eval()
@@ -52,7 +48,7 @@ for data in loader:
     img_parts  = createParts(data[0].data.numpy().squeeze())
     img_p = np.asarray(img_parts)
     img_p = img_p[:, np.newaxis, :, :]
-    out = model(torch.from_numpy(img_p).cuda())
+    out = model(torch.from_numpy(img_p).cuda())[0]
     fs = out.cpu().data.numpy().squeeze()
     arr = []
     for i in range (12):
@@ -61,6 +57,3 @@ for data in loader:
     
 #matplotlib.image.imsave('respore.png', rs)
 matplotlib.image.imsave('domain.png', rs)
-
-#gray_image = cv2.cvtColor(rs, cv2.COLOR_BGR2GRAY)
-#cv2.imwrite('respore-gray.jpg', gray_image)
